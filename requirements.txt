@@ -1,0 +1,18 @@
+Core objectives:
+
+The default grid that is displayed should be 16 x 16
+The user should be able to change the grid size
+If the user changes the style of the grid, it should clear previous squares
+The maximum possible grid should be 100 x 100
+The grid should use the same total screen space regardless of dimensions
+When a user hovers over a square, the colour of the square should change
+
+Bonus objectives:
+
+The colours of the grid should be random
+When the user hovers over a square, it should get darker on each hover
+
+Additionals:
+
+Idea - Have a selection of default colours at the bottom & a random option
+Clarification - How do the two bonus objectives work together? Should the randomising stop after a colour has been selected?
