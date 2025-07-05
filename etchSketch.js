@@ -1,10 +1,13 @@
 // Constants
-let maxHeight = 800;
-let maxWidth = 800;
+let maxHeight = 700;
+let maxWidth = 700;
 
 // Should be able to change these via input
 let gridWidth = 16;
 let gridHeight = 16;
+
+let definedColors = ['red', 'blue', 'yellow', 'green', 'orange', 'purple', 'black', 'white']
+let currentColor = 'black';
 
 let gridContainer = document.querySelector('.grid-container');
 gridContainer.style.width = `${maxWidth}px`;
@@ -24,9 +27,32 @@ btnSetGrid.addEventListener("click", (event) => {
     else {
         clearGrid(gridContainer);
         drawGrid();
+        addGridListeners();
     }
 
 });
+
+function addGridListeners() {
+    let elementsArray = document.querySelectorAll(".square");
+    elementsArray.forEach(function(element) {
+    element.addEventListener("mouseover", (event) => {
+        if (currentColor === 'random') {
+            event.target.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+        }
+        event.target.style.backgroundColor = `${currentColor}`
+    }) 
+})
+}
+
+function addColorListeners() {
+    let elementsArray = document.querySelectorAll(".defined-color");
+    elementsArray.forEach(function(element) {
+    element.addEventListener("click", (event) => {
+        currentColor = event.target.title;
+        console.log(currentColor);
+    })
+})
+}
 
 function clearGrid(container) {
     while(container.firstChild) {
@@ -60,4 +86,30 @@ function drawGrid() {
     }
 }
 
+function setColorValues(color) {
+    color.style.width = "50px";
+    color.style.height = "50px";
+}
+
+function createColorOptions() {
+    let colorContainer = document.querySelector('.color-container');
+    definedColors.forEach(function(col) {
+        let definedColor = document.createElement('div');
+        definedColor.className = `defined-color ${col}`;
+        definedColor.title = col;
+        setColorValues(definedColor);
+        definedColor.style.backgroundColor = `${col}`;
+        colorContainer.appendChild(definedColor);
+    })
+    
+    let definedColor = document.createElement('div');
+    definedColor.className = 'defined-color random-color';
+    definedColor.title = 'random';
+    setColorValues(definedColor);
+    colorContainer.appendChild(definedColor);
+}
+
 drawGrid();
+addGridListeners();
+createColorOptions();
+addColorListeners();
