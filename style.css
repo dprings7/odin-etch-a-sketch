@@ -54,6 +54,7 @@ body {
 .square {
     box-sizing: border-box;
     border: 1px solid rgb(172, 168, 168);
+    opacity: 0.1;
 }
 
 .color-row {

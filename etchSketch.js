@@ -36,20 +36,34 @@ function addGridListeners() {
     let elementsArray = document.querySelectorAll(".square");
     elementsArray.forEach(function(element) {
     element.addEventListener("mouseover", (event) => {
+        elementOpacity = Number(getComputedStyle(event.target).opacity);
         if (currentColor === 'random') {
+            elementOpacity = 1;
+            event.target.style.opacity = 1;
             event.target.style.backgroundColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
         }
-        event.target.style.backgroundColor = `${currentColor}`
+        else {
+            if (event.target.style.backgroundColor !== currentColor) {
+                elementOpacity = 0.1;
+                event.target.style.opacity = 0.1;
+            }
+            event.target.style.backgroundColor = `${currentColor}`;
+            if (event.target.style.backgroundColor === currentColor) {
+                elementOpacity += 0.1;
+                if (elementOpacity > 1) elementOpacity = 1;
+                event.target.style.opacity = elementOpacity
+            } 
+        }
     }) 
 })
 }
+
 
 function addColorListeners() {
     let elementsArray = document.querySelectorAll(".defined-color");
     elementsArray.forEach(function(element) {
     element.addEventListener("click", (event) => {
         currentColor = event.target.title;
-        console.log(currentColor);
     })
 })
 }
